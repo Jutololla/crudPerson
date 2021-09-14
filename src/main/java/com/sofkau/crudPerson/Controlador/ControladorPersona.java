@@ -27,8 +27,13 @@ public class ControladorPersona {
         return servicio.actualizar(persona);
     }
 
-    @DeleteMapping(value="/delete/{id}")
+    @DeleteMapping(value="/eliminar/{id}")
     public void eliminarPersona(@PathVariable int id){
         servicio.borrar(id);
+    }
+
+    @GetMapping(value="buscar/{id}")
+    public Persona buscarPersonaPorId(@PathVariable int id){
+        return servicio.listarId(id);
     }
 }

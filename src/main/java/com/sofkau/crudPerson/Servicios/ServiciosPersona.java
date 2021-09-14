@@ -22,7 +22,11 @@ public class ServiciosPersona implements InterfazServiciosPersona{
 
     @Override
     public Persona listarId(int id) {
-        return null;
+        Optional<Persona> auxPersona = data.findById(id);
+        if(auxPersona.isEmpty()){
+            throw new NoSuchElementException("El elemento a buscar no existe en la base de datos");
+        }
+        return auxPersona.get();
     }
 
     @Override
