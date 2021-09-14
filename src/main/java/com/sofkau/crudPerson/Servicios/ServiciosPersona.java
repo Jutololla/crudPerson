@@ -32,7 +32,11 @@ public class ServiciosPersona implements InterfazServiciosPersona{
 
     @Override
     public void borrar(int id) {
-
+        Optional<Persona> auxPersona = data.findById(id);
+        if(auxPersona.isEmpty()){
+            throw new NoSuchElementException("El elemento a eliminar no existe en la base de datos");
+        }
+        data.deleteById(id);
     }
 
     @Override
@@ -41,14 +45,6 @@ public class ServiciosPersona implements InterfazServiciosPersona{
         if(auxPersona.isEmpty()){
             throw new NoSuchElementException("El elemento a editar no existe en la base de datos");
         }
-        else{
-            return data.save(persona);
-        }
-//        return auxPersona.map(Persona ->{
-//            persona.setId(persona.getId());
-//            persona.setNombre(persona.getNombre());
-//            persona.setEdad(persona.getEdad());
-//            return data.save(persona);
-//        }).get();
-    }
+        return data.save(persona);
+            }
 }
