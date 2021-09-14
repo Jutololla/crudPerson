@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Service
 public class ServiciosPersona implements InterfazServiciosPersona{
@@ -35,6 +37,18 @@ public class ServiciosPersona implements InterfazServiciosPersona{
 
     @Override
     public Persona actualizar(Persona persona) {
-        return null;
+        Optional<Persona> auxPersona = data.findById(persona.getId());
+        if(auxPersona.isEmpty()){
+            throw new NoSuchElementException("El elemento a editar no existe en la base de datos");
+        }
+        else{
+            return data.save(persona);
+        }
+//        return auxPersona.map(Persona ->{
+//            persona.setId(persona.getId());
+//            persona.setNombre(persona.getNombre());
+//            persona.setEdad(persona.getEdad());
+//            return data.save(persona);
+//        }).get();
     }
 }

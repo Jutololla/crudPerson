@@ -17,8 +17,13 @@ public class ControladorPersona {
         return servicio.listar();
     }
 
-    @PostMapping(value = "/guardarPersonas")
+    @PostMapping(value = "/guardarPersona")
     public Persona guardarPersona(@RequestBody Persona persona){
         return servicio.guardar(persona);
+    }
+
+    @PutMapping(value="/editarPersona")
+    public Persona editarPersona(@RequestBody Persona persona){
+        return servicio.actualizar(persona);
     }
 }
